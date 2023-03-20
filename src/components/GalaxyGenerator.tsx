@@ -71,10 +71,6 @@ const GalaxyGenerator = () => {
         //@ts-ignore
         const branchAngle = i % parameters.branches
 
-        if (i < 20) {
-          console.log('first')
-        }
-
         positions[i3 + 0] = Math.cos(branchAngle) * radius
         positions[i3 + 1] = 0
         positions[i3 + 2] = Math.sin(branchAngle) * radius
