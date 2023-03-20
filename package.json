@@ -18,5 +18,8 @@
     "react-dom": "18.2.0",
     "three": "^0.150.1",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "@types/three": "^0.149.0"
   }
 }
