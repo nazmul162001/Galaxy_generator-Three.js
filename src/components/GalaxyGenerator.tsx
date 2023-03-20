@@ -26,9 +26,17 @@ const GalaxyGenerator = () => {
     //@ts-ignore
     parameters.count = 1000
     //@ts-ignore
+    parameters.size = 0.01
+    //@ts-ignore
+    parameters.radius = 5
+    //@ts-ignore
+    parameters.branches = 3
 
+    //@ts-ignore
     let geometry = null
+    //@ts-ignore
     let material = null
+    //@ts-ignore
     let points = null
 
     //@ts-ignore
@@ -58,9 +66,18 @@ const GalaxyGenerator = () => {
       for (let i = 0; i < parameters.count; i++) {
         const i3 = i * 3
 
-        positions[i3] = (Math.random() - 0.5) * 3
-        positions[i3 + 1] = (Math.random() - 0.5) * 3
-        positions[i3 + 2] = (Math.random() - 0.5) * 3
+        //@ts-ignore
+        const radius = Math.random() * parameters.radius
+        //@ts-ignore
+        const branchAngle = i % parameters.branches
+
+        if (i < 20) {
+          console.log('first')
+        }
+
+        positions[i3 + 0] = Math.cos(branchAngle) * radius
+        positions[i3 + 1] = 0
+        positions[i3 + 2] = Math.sin(branchAngle) * radius
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -94,6 +111,18 @@ const GalaxyGenerator = () => {
       .min(0.001)
       .max(0.1)
       .step(0.001)
+      .onFinishChange(generateGalaxy)
+    gui
+      .add(parameters, 'radius')
+      .min(0.01)
+      .max(20)
+      .step(0.01)
+      .onFinishChange(generateGalaxy)
+    gui
+      .add(parameters, 'branches')
+      .min(2)
+      .max(20)
+      .step(1)
       .onFinishChange(generateGalaxy)
 
     /**
